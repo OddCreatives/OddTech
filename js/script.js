@@ -696,28 +696,103 @@
 	});
 
 	// Client carousel
-	$(".client-carousel").owlCarousel({
-		autoplay: true,
-		smartSpeed: 500,
-		margin: 90,
-		dots: false,
-		loop: true,
-		nav: false,
-		responsive: {
-			0: {
-				items: 2
+	// $(".client-carousel").owlCarousel({
+	// 	autoplay: true,
+	// 	smartSpeed: 500,
+	// 	margin: 90,
+	// 	dots: false,
+	// 	loop: true,
+	// 	nav: false,
+	// 	responsive: {
+	// 		0: {
+	// 			items: 2
+	// 		},
+	// 		576: {
+	// 			items: 3
+	// 		},
+	// 		768: {
+	// 			items: 4
+	// 		},
+	// 		992: {
+	// 			items: 5
+	// 		},
+	// 		1200: {
+	// 			items: 6
+	// 		}
+	// 	}
+	// });
+
+
+	// Corrowsal 2
+
+	$(function () {
+		// vars for clients list carousel
+		// http://stackoverflow.com/questions/6759494/jquery-function-definition-in-a-carousel-script
+		var $clientcarousel = $('#clients-list');
+		var clients = $clientcarousel.children().length;
+		var clientwidth = (clients * 220); // 140px width for each client item 
+		$clientcarousel.css('width', clientwidth);
+
+		var rotating = true;
+		var clientspeed = 0;
+		var seeclients = setInterval(rotateClients, clientspeed);
+
+		$(document).on({
+			mouseenter: function () {
+				rotating = false; // turn off rotation when hovering
 			},
-			576: {
-				items: 3
+			mouseleave: function () {
+				rotating = true;
+			}
+		}, '#clients');
+
+		function rotateClients() {
+			if (rotating != false) {
+				var $first = $('#clients-list li:first');
+				$first.animate({
+					'margin-left': '-220px'
+				}, 2000, function () {
+					$first.remove().css({
+						'margin-left': '0px'
+					});
+					$('#clients-list li:last').after($first);
+				});
+			}
+		}
+	});
+
+	$(function () {
+		// vars for clients list carousel
+		// http://stackoverflow.com/questions/6759494/jquery-function-definition-in-a-carousel-script
+		var $clientcarousel = $('#clients2-list');
+		var clients2 = $clientcarousel.children().length;
+		var clientwidth = (clients2 * 220); // 140px width for each client item 
+		$clientcarousel.css('width', clientwidth);
+
+		var rotating = true;
+		var clients2peed = 0;
+		var seeclients2 = setInterval(rotateClients2, clients2peed);
+
+		$(document).on({
+			mouseenter: function () {
+				rotating = false; // turn off rotation when hovering
 			},
-			768: {
-				items: 4
-			},
-			992: {
-				items: 5
-			},
-			1200: {
-				items: 6
+			mouseleave: function () {
+				rotating = true;
+			}
+		}, '#clients2');
+
+		function rotateClients2() {
+			if (rotating != false) {
+				var $first = $('#clients2-list li:first');
+				$first.animate({
+					'margin-left': '-220px'
+				}, 2000, function () {
+					$first.remove().css({
+						'margin-left': '0px'
+					});
+					$('#clients2-list li:last').after($first);
+				});
 			}
 		}
 	});
